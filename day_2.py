@@ -1,29 +1,31 @@
-def outcome(op, me):
-    winning = {('rock', 'scissors'), ('scissors', 'paper'), ('paper', 'rock')}
+def choose_shape(op, outcome):
+    win = {'scissors': 'rock', 'paper': 'scissors', 'rock': 'paper'}
+    lose = {v: k for k, v in win.items()}
 
-    if (me, op) in winning: return 'won'
-    if me == op: return 'draw'
-    return 'lost'
+    if outcome == 'draw':
+        return op
+    if outcome == 'won':
+        return win[op]
+    return lose[op]
 
-def play_round(opponent_choice, my_choice):
+def play_round(opponent_choice, outcome):
     decryption = {'A': 'rock', 'B': 'paper', 'C': 'scissors',
-                  'X': 'rock', 'Y': 'paper', 'Z': 'scissors'}
+                  'X': 'lost', 'Y': 'draw', 'Z': 'won'}
     
     opponent_choice = decryption[opponent_choice]
-    my_choice = decryption[my_choice]
+    outcome = decryption[outcome]
 
-    outcome_scores = {'lost': 0, 'draw': 3, 'won': 6}
-    shape_scores = {'rock': 1, 'paper': 2, 'scissors': 3}
+    outcome_score = {'lost': 0, 'draw': 3, 'won': 6}
+    shape_score = {'rock': 1, 'paper': 2, 'scissors': 3}
 
-    outcome_score = outcome_scores[outcome(opponent_choice, my_choice)]
-    shape_score = shape_scores[my_choice]
-    return outcome_score + shape_score
+    shape = choose_shape(opponent_choice, outcome)
+    return outcome_score[outcome] + shape_score[shape]
 
 def rock_paper_scissors(strategy_guide):
     total_score = 0
     for strategy in strategy_guide:
-        opponent_choice, my_choice = strategy.split(' ')
-        total_score += play_round(opponent_choice, my_choice[:-1])
+        opponent_choice, outcome = strategy.split(' ')
+        total_score += play_round(opponent_choice, outcome[:-1])
 
     return total_score
 
