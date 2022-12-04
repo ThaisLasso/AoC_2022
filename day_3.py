@@ -17,10 +17,6 @@ def find_shared_items(group):
     shared = set(item for item in rucksack_1 if item in set(rucksack_2) and item in set(rucksack_3))
     return shared
 
-def dispose_items(rucksack):
-    half = int(len(rucksack)/2)
-    return rucksack[:half], rucksack[half:]
-
 if __name__ == '__main__':
     inputs = open('day_3_input.txt', 'r').readlines()
     print(sum_priorities(inputs))

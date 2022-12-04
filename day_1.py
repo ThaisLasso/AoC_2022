@@ -6,7 +6,7 @@ def update_inventories(biggest_inventories, elf_calories):
         biggest_inventories[0] = elf_calories
     return biggest_inventories
 
-def find_biggest_inventory(inputs):
+def find_biggest_inventories(inputs):
     biggest_inventories = [0, 0, 0]
     elf_calories = 0
     for cal in inputs:
@@ -20,4 +20,4 @@ def find_biggest_inventory(inputs):
 
 if __name__ == '__main__':
     inputs = open('day_1_input.txt', 'r').readlines()
-    print(find_biggest_inventory(inputs))
+    print(find_biggest_inventories(inputs))
